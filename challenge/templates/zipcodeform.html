@@ -1,0 +1,112 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static from staticfiles %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- head -->
+  <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Represently Test</title>
+        <!-- Static files -->
+         <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/results.css' %}">
+         <!-- Static files -->
+         <!-- animate.css doccumentation:https://github.com/daneden/animate.css/ -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">    
+        <!-- animate.css -->     
+ </head>
+<!-- end head -->
+
+<body>
+<!--Navbar-->
+<div class = "wrap">
+        <nav class="navbar navbar-inverse navbar-static-top m-b-5">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+              </button>
+              <a class="navbar-brand" href="">Represently</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="">Home</a></li>
+                <li class="active"><a href="">ZipCode Query</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+<!-- end Navbar -->
+{%block content %}
+    <!-- jumbotron -->
+      
+        <div id = "home">
+            <div class="jumbotron jumbotron-fluid bg-info">
+                <div class="container text-sm-center p-t-3">
+                <h1 id ='represently'class ="display-2">Represently</h1>
+                </div>
+            </div>
+        </div>
+ <!-- end jumbotron -->
+
+
+
+<!--form -->    
+  <!-- if the form contained any errors -->
+ {%if error or formErrors%}
+    <div id = "zipcode" class ="animated wobble">
+    <p class="lead">Discover your Congressman and Senators by typing your Zip Code below!</p>
+
+                <form action = "" method = "POST" class ="form ">
+                  {%if error%}
+                    <p class ="errorList">{{error}}</p>
+                    <br>
+                 {%endif%}
+                {{form.as_p}}
+                {%csrf_token%}
+                <input type = "submit" class="btn btn-primary">
+            </form>
+    </div>
+
+    <!-- form did not contain errors -->
+{%else%}
+      <div id = "zipcode" class ="animated bounceInUp">
+            <p class="lead">Discover your Congressman and Senators by typing your Zip Code below!</p>
+                  
+                  <form action = "" method = "POST" class ="form ">
+                      {{form.as_p}}
+                      {%csrf_token%}
+                      <input type = "submit" class="btn btn-primary">
+                  </form>         
+      </div>
+      
+ {%endif%}
+<!-- end form -->
+
+{%endblock%}
+
+</div>
+<!-- footer -->
+
+<footer class="footer">
+    <div class="footer_contents">
+          Represently © 2017 · All Rights Reserved ·
+            Proudly coded in Washington, DC
+      
+    </div>
+
+</footer>    
+<!-- end footer-->
+
+</html>
+

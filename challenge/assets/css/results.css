@@ -1,0 +1,28 @@
+/* css page for results page*/
+
+body{
+    background:white;
+}
+
+table{
+    background-color:#E8E8E8;
+}
+.tables{
+    margin-left:auto; 
+    margin-right:auto;
+    width:60%;
+    box-shadow: 10px 10px #333;
+}
+th{
+    background-color:#FF0000;
+    color: white;
+}
+
+tr,td {
+    border: 4px solid black;
+}
+
+footer_contents{
+    font-weight:bold;
+    text-align:center;
+}

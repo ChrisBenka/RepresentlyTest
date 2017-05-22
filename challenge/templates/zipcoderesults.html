@@ -1,0 +1,128 @@
+{% extends "zipcodeform.html" %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static from staticfiles %}
+
+<body>
+
+{%block content %}
+    <div id ="results">
+        <!-- table to display State District Number -->
+        <table class =" tables table table-bordered table-hover animated bounceInLeft">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>District Number</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td> {{results.state_name}}</td>
+                   <td>{{results.district_number}}</td>
+        </table>
+         <!--  end table to display State District Number -->
+
+        <br>
+        <!-- table to display Senator Names corresponding to State -->
+        <table class ="tables table table-bordered table-hover animated bounceInLeft">
+            <tr>
+                <th>Senator Names</th>
+                <!-- check to see that the state has a senator -->
+                 {%if senators%}
+                     {% for senator in senators%}
+                     <tr>
+                          <td>{{senator}}</td>
+                    <tr>
+                     {%endfor%}
+                {% else %}
+                    <tr>
+                        <td>You have entered a zip code that does not have a Senator</td>
+                    </tr>
+                {%endif%}
+        </table>
+                <!-- table to display Senator Names corresponding to State -->
+        <br>
+                <!-- table to display congressman's name corresponding to District -->
+              <table class =" tables table table-bordered table-hover animated bounceInLeft">
+            <tr>
+                <th>Congressman</th>
+                <!-- check to see that the district has a congressman -->
+                 {%if representative%}
+                     <tr>
+                          <td>{{representative}}</td>
+                    <tr>
+                {% else %}
+                    <tr>
+                        <td class ="errorMessage">You have entered a zip code that does not have a Congressman</td>
+                    </tr>
+                {%endif%}
+        </table>
+         <!-- end table to display congressman's name corresponding to District -->
+        <br>
+
+        <!-- Tables to display recent bills voted on by Senators -->
+        <table class ="tables table table-bordered table-hover  animated bounceInLeft">
+            <tr>
+                <th>Recent Bills Voted on by {{senators.0}}</th>
+                <th>Vote Cast</th>
+                 {%if senators.0%}
+                     {% for bill in senator1_bills%}
+                     <tr>
+                       <td>{{ bill.description }}</td>
+                       <td> {{ bill.position }} </td>
+                      <tr>
+                  {% endfor%}
+              <!-- if no bills were returned to be rendered that means no Senator -->
+                {% else %}
+                    <tr>
+                        <td>You have entered a zip code that does not have a Senator</td>
+                    </tr>
+                {%endif%}
+        </table>
+          <table class ="tables table table-bordered table-hover  animated bounceInLeft">
+            <tr>
+                <th>Recent Bills Voted on by {{senators.1}}</th>
+                <th>Vote Cast</th>
+                 {%if senators.1%}
+                     {% for bill in senator2_bills%}
+                     <tr>
+                       <td>{{ bill.description }}</td>
+                       <td> {{ bill.position }} </td>
+                      <tr>
+                  {% endfor%}
+                    <!-- if no bills were returned to be rendered that means no Senator -->
+                {% else %}
+                    <tr>
+                        <td>You have entered a zip code that does not have a Senator</td>
+                    </tr>
+                {%endif%}
+        </table>
+    
+     <!-- end tables to display recent bills voted on by Senators -->
+
+        <br>
+        <!-- table to display recent bills voted on by congressman -->
+        <table class ="tables table table-bordered table-hover  animated bounceInLeft">
+            <tr>
+                <th>Recent Bills Voted on by {{representative}}</th>
+                <th>Vote Cast</th>
+                 {%if representative_bills%}
+                     {% for bill in representative_bills%}
+                     <tr>
+                       <td>{{ bill.description }}</td>
+                       <td> {{ bill.position }} </td>
+                      <tr>
+                  {% endfor%}
+                  <!-- if no bills were returned to be rendered that means no Congressman -->
+                {% else %}
+                    <tr>
+                        <td>You have entered a zip code that does not have a Congressman</td>
+                    </tr>
+                {%endif%}
+        </table>
+         <!-- end table to display recent bills voted on by congressman -->
+    </div>
+{%endblock%}
+</body>
